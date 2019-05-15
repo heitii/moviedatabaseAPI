@@ -37,7 +37,7 @@ class Movie(Resource):
 
     def post(self, name):
         if MovieModel.find_by_name(name):
-            return {'message': "A movie with name '{}' already exists.".format(name)}
+            return {'message': "A movie with name '{}' already exists.".format(name)}, 400
 
         data = Movie.parser.parse_args()
         movie = MovieModel(name, **data)
@@ -45,7 +45,7 @@ class Movie(Resource):
         try:
             movie.save_to_db()
         except:
-            return {"message": "An error occurred inserting the movie."}
+            return {"message": "An error occurred inserting the movie."}, 500
 
         return movie.json(), 201
 
