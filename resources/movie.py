@@ -53,7 +53,8 @@ class Movie(Resource):
         movie = MovieModel.find_by_name(name)
         if movie:
             movie.delete_from_db()
-        return {'message': 'Movie deleted'}
+            return {'message': 'Movie deleted'}
+        return {'message': 'Item not found.'}, 404
 
     def put(self, name):
         data = Movie.parser.parse_args()

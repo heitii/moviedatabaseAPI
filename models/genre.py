@@ -9,6 +9,7 @@ class GenreModel(db.Model):
     movies = db.relationship('MovieModel', lazy='dynamic')
 
     def __init__(self, name):
+        self.id = name
         self.name = name
 
     def json(self):
