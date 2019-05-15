@@ -17,10 +17,10 @@ api = Api(app)
 
 jwt = JWT(app, authenticate, identity)
 
-api.add_resource(Store, '/genre/<string:name>')
-api.add_resource(Item, '/movie/<string:name>')
-api.add_resource(ItemList, '/movies')
-api.add_resource(StoreList, '/genres')
+api.add_resource(Genre, '/genre/<string:name>')
+api.add_resource(Movie, '/movie/<string:name>')
+api.add_resource(MovieList, '/movies')
+api.add_resource(GenreList, '/genres')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
