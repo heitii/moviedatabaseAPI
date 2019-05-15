@@ -30,18 +30,18 @@ class Movie(Resource):
     )
 
     @jwt_required()
-    def get(self, title):
-        movie = MovieModel.find_by_title(title)
+    def get(self, name):
+        movie = MovieModel.find_by_name(name)
         if movie:
             return movie.json()
         return {'message': 'Movie not found'}, 404
 
-    def post(self, title):
-        if MovieModel.find_by_title(title):
-            return {'message': "A movie with title '{}' already exists.".format(title)}
+    def post(self, name):
+        if MovieModel.find_by_name(name):
+            return {'message': "A movie with name '{}' already exists.".format(name)}
 
         data = Movie.parser.parse_args()
-        movie = MovieModel(title, **data)
+        movie = MovieModel(name, **data)
 
         try:
             movie.save_to_db()
@@ -50,19 +50,19 @@ class Movie(Resource):
 
         return movie.json(), 201
 
-    def delete(self, title):
-        movie = MovieModel.find_by_title(title)
+    def delete(self, name):
+        movie = MovieModel.find_by_name(name)
         if movie:
             movie.delete_from_db()
         return {'message': 'Movie deleted'}
 
-    def put(self, title):
+    def put(self, name):
         data = Movie.parser.parse_args()
 
-        movie = MovieModel.find_by_title(title)
+        movie = MovieModel.find_by_name(name)
         
         if movie is None:
-            movie = MovieModel(title, **data) 
+            movie = MovieModel(name, **data) 
         else:
             movie.year = data['year']
             movie.length = data['length']
