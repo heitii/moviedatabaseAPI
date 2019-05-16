@@ -10,7 +10,6 @@ from resources.movie import Movie, MovieList
 from resources.genre import Genre, GenreList
 
 app = Flask(__name__)
-app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'tiia'
